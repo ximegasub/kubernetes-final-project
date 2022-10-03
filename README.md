@@ -24,7 +24,7 @@ Download the project by cloning the Git repo.
 $ git clone https://github.com/ximegasub/kubernetes-final-project.git
 ```
 
-### Create image in the final-app-deployment.yml
+### Create image for the final-app-deployment.yml
 The existing image is in [DockerHub](https://hub.docker.com/repository/docker/ximegasub/python-flask-kb8).
 ```
 $ docker build -t ximegasub/python-flask-kb8:0.5 .
@@ -63,7 +63,8 @@ http://<IP node>:8000/
 $ The employee with name: <name>, last name: <last_name>, role: <role> was created succesfully.
 ```
 
-### Verify the running app by checking the result in case the name was already saved:
+### Verify the running app by checking the result in case the employee's name was already created:
 ```
 $ Employee already exists.
 ```
+Note: Check this working on my assigned instance: ```k8s-instance-6```
