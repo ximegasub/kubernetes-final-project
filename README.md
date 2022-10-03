@@ -3,7 +3,7 @@ Basic Python Flask app deployed using Kubernetes which saves the name, last_name
 
 ### Project structure
 ```
-python-project/
+final-project/
 ├── src
 │   ├── __init__.py
 │   └──app.py
