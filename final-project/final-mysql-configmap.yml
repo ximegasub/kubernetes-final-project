@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: final-mysql-config
+  labels:
+    app: final-project
+data:
+  mysql-database: myappdb
+  mysql-host: 10.42.2.25

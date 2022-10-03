@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: final-project-service
+  labels:
+    app: final-project
+spec:
+  selector:
+    app: final-project
+  type: ClusterIP
+  ports:
+    - targetPort: 8000
+      port: 8000
+  

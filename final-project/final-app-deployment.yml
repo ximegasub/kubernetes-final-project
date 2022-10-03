@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: final-app-deployment
+  labels:
+    app: final-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: final-project
+  template:
+    metadata:
+      name: final-app
+      labels:
+        app: final-project
+    spec:
+      containers:
+        - name: final-project-kb8
+          image: ximegasub/python-flask-kb8:0.5
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: final-mysql-config
+                  key: mysql-database
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: final-mysql-config
+                  key: mysql-host
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: final-mysql-credentials
+                  key: mysql-user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: final-mysql-credentials
+                  key: mysql-password

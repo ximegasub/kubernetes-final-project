@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: final-mysql-deployment
+  labels:
+    app: final-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: final-project
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      name: final-mysql
+      labels:
+        app: final-project
+    spec:
+      containers:
+        - name: db
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: final-mysql-config
+                  key: mysql-database
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: final-mysql-credentials
+                  key: mysql-root-password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: final-mysql-credentials
+                  key: mysql-user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: final-mysql-credentials
+                  key: mysql-password
