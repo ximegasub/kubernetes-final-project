@@ -14,6 +14,7 @@ final-project/
 ├── final-mysql-configmap.yml
 ├── final-mysql-deployment.yml
 ├── final-mysql-secret.yml
+├── final-mysql-service.yml
 └── requirements.txt
 ```
 
@@ -23,16 +24,17 @@ Download the project by cloning the Git repo.
 $ git clone https://github.com/ximegasub/kubernetes-final-project.git
 ```
 
-### Use precreated image in the final-app-deployment.yml
-You can also just download the existing image from [DockerHub](https://hub.docker.com/repository/docker/ximegasub/python-flask-kb8).
+### Create image in the final-app-deployment.yml
+The existing image is in [DockerHub](https://hub.docker.com/repository/docker/ximegasub/python-flask-kb8).
 ```
-docker pull ximegasub/python-flask-kb8:0.5
+$ docker build -t ximegasub/python-flask-kb8:0.5 .
+$ docker push ximegasub/python-flask-kb8:0.5
 ```
 
 ### Prerequisites
 Run this command, then grab the result and set this IP address in ```final-mysql-configmap.yml``` in ```mysql-host```
 ```
-$ kubectl get pod <pod name> -o template --template={{.status.podIP}}
+$ kubectl get pod <final-mysql-deployment-....> -o template --template={{.status.podIP}}
 ```
 
 ### Run the manifests
@@ -40,6 +42,7 @@ $ kubectl get pod <pod name> -o template --template={{.status.podIP}}
 $ kubectl apply -f final-mysql-configmap.yml
 $ kubectl apply -f final-mysql-secret.yml
 $ kubectl apply -f final-mysql-deployment.yml
+$ kubectl apply -f final-mysql-service.yml
 $ kubectl apply -f final-app-deployment.yml
 $ kubectl apply -f final-app-service.yml
 $ kubectl apply -f final-ingress.yml
